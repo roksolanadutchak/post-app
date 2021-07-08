@@ -8,9 +8,9 @@ function GetPosts(){
     }, [data])
     if (loading) return 'Loading...';
     return data.posts.data.map(({id, title, body}) => (
-        <div key={id}>
-            <h1>{title}</h1>
-            <p>{body}</p>
+        <div key={id} class="bg-white dark:bg-gray-800">
+            <h1 class="text-gray-900 dark:text-white">{title}</h1>
+            <p class="text-gray-600 dark:text-gray-300">{body}</p>
         </div>
     ))
 }

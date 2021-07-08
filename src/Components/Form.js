@@ -25,9 +25,9 @@ function Form() {
            <input type="text" onChange={
                (e) => {
                    setTitle(e.target.value);
-               }} />
-           <input type="text" onChange={(event => setBody(event.target.value))}/>
-           <button onClick={addPost}>Create Post</button>
+               }} class="form-input px-2 py-1 rounded-full bg-gray-300" />
+           <input type="text" onChange={(event => setBody(event.target.value))} class="form-input px-2 py-1 rounded-full bg-gray-300"/>
+           <button onClick={addPost} class="bg-indigo-300 rounded ring-2 text-indigo-900">Create Post</button>
        </form>
     )
 }
