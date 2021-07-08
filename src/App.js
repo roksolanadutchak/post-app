@@ -9,6 +9,7 @@ import {
 } from "@apollo/client";
 import GetUser from "./Components/GetUser";
 import GetPosts from "./Components/GetPosts";
+import Form from "./Components/Form";
 
 const client = new ApolloClient({
   uri: 'https://graphqlzero.almansi.me/api',
@@ -17,6 +18,7 @@ const client = new ApolloClient({
 function App() {
   return <ApolloProvider client={client}>
     {" "}
+    <Form />
     <GetUser />
     <GetPosts />
   </ApolloProvider>
