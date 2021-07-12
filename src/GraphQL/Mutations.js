@@ -10,3 +10,21 @@ export const CREATE_POST_INPUT = gql`
       }
     }
 `;
+export const UPDATE_POST = gql`
+    mutation (
+      $id: ID!,
+      $input: UpdatePostInput!
+    ) {
+      updatePost(id: $id, input: $input) {
+        id
+        body
+      }
+    }
+`
+export const DELETE_POST = gql`
+    mutation (
+  $id: ID!
+) {
+  deletePost(id: $id)
+}
+`
