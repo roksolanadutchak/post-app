@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useQuery, useMutation} from "@apollo/client";
 import {LOAD_POSTS} from "../GraphQL/Queries";
 import Form from "./Form";
+import FormikForm from "./FormikForm";
 import {DELETE_POST, UPDATE_POST} from "../GraphQL/Mutations";
 function GetPosts(){
     const {loading,  data} = useQuery(LOAD_POSTS);
@@ -21,13 +22,13 @@ function GetPosts(){
                     <button  onClick={() => {
                         setModalOpen(true)}
                     } className="mt-3 bg-blue-300 rounded ring-2 text-indigo-900 h-7 w-full">Add new post</button>
-                    {modalOpen && <Form setOpenModal={setModalOpen}/>}
+                    {modalOpen && <FormikForm setOpenModal={setModalOpen}/>}
                 </div>
             </div>
             <div className="inline-grid grid-cols-1 md:grid-cols-3 gap-x-4 place-items-stretch">
                 {data.posts.data.map(({id, title, body}) => (
                     <div key={id} className="shadow-md rounded-md mt-8 bg-blue-100 ">
-                        <div className="grid p-2 h-16 rounded-md bg-blue-300 grid-cols-12 ">
+                        <div className="grid p-2 h-18 rounded-md bg-blue-300 grid-cols-12 ">
                             <div className="col-span-11">
                                 <h1 className="text-center">{title}</h1>
                             </div>
