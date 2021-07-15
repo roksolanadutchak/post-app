@@ -19,6 +19,7 @@ import GetPosts from "./Components/GetPosts";
 import Home from "./Components/Home";
 import Header from "./Components/Header";
 import AddPost from "./Components/AddPost";
+import EditPost from "./Components/EditPost";
 
 const client = new ApolloClient({
   uri: 'https://graphqlzero.almansi.me/api',
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path="/add">
               <AddPost />
+            </Route>
+            <Route path="/edit/:id">
+              <EditPost />
             </Route>
           </Switch>
         </div>
