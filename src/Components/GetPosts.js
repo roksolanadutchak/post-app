@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useQuery, useMutation} from "@apollo/client";
 import {Link } from 'react-router-dom';
 import {LOAD_POSTS} from "../GraphQL/Queries";
-import {DELETE_POST, UPDATE_POST} from "../GraphQL/Mutations";
+import {DELETE_POST} from "../GraphQL/Mutations";
 import { default as dismiss } from '../assets/delete.svg';
 import { default as pencil} from '../assets/pencil.svg'
 
@@ -20,10 +20,10 @@ function GetPosts(){
 
     return (
         <div className="container mx-auto ">
-            <div className="inline-grid grid-cols-1 md:grid-cols-3 gap-x-4 place-items-stretch">
+            <div className="post-wrapper">
                 {data.posts.data.map(({id, title, body}) => (
-                    <div key={id} className="shadow-md rounded-md mt-8 bg-blue-100 " >
-                        <div className="grid p-2 h-18 rounded-md bg-blue-300 grid-cols-12 ">
+                    <div key={id} className="card" >
+                        <div className="card-header">
                             <div className="col-span-11">
                                 <h1 className="text-center">{title}</h1>
                             </div>

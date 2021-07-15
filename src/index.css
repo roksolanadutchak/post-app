@@ -37,4 +37,13 @@ code {
   .nav-li {
     @apply mr-1 mt-1 active:bg-blue-100;
   }
+  .post-wrapper {
+    @apply inline-grid grid-cols-1 md:grid-cols-3 gap-x-4 place-items-stretch
+  }
+  .card {
+    @apply shadow-md rounded-md mt-8 bg-blue-100
+  }
+  .card-header {
+    @apply grid p-2 h-auto  md:h-16 rounded-md bg-blue-300 grid-cols-12
+  }
 }
