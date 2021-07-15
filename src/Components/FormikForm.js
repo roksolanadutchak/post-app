@@ -22,7 +22,7 @@ const validate = values => {
     }
     return errors;
 }
-function FormikForm ({ setOpenModal }) {
+function FormikForm () {
     const [createPost, { error }] = useMutation(CREATE_POST_INPUT)
 
     const formik = useFormik({
@@ -69,14 +69,6 @@ function FormikForm ({ setOpenModal }) {
                 <div className="md:col-start-2 col-span-4">
             <button type="submit" className="btn btn-submit">Submit</button>
                 </div>
-                <div className="col-span-4 "><button
-                onClick={() => {
-                    setOpenModal(false);
-                }}
-                className="btn btn-cancel"
-            >
-                Cancel
-                </button></div>
             </div>
         </form>
     )

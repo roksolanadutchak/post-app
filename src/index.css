@@ -17,15 +17,24 @@ code {
 @tailwind forms;
 @layer components {
   .input {
-    @apply form-input px-2 py-1 rounded-md bg-blue-50 placeholder-gray-500 placeholder-opacity-75 w-full;
+    @apply form-input px-2 py-1 rounded-md bg-blue-50 placeholder-gray-500 placeholder-opacity-75;
   }
   .btn {
-    @apply h-7 w-full rounded ring-2;
+    @apply h-7 rounded ring-2;
   }
   .btn-submit {
-    @apply bg-blue-200 text-indigo-900
+    @apply bg-blue-200 text-indigo-900;
   }
   .btn-cancel {
-    @apply bg-red-300 ring-red-400 text-red-900
+    @apply bg-red-300 ring-red-400 text-red-900;
+  }
+  .nav-ul {
+    @apply inline-grid grid-cols-1 md:grid-cols-3 gap-x-4 place-items-stretch border-b
+  }
+  .nav-link {
+    @apply text-blue-900 hover:text-blue-500 text-xl;
+  }
+  .nav-li {
+    @apply mr-1 mt-1 active:bg-blue-100;
   }
 }
