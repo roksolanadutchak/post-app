@@ -1,38 +1,48 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {UPDATE_POST} from "../GraphQL/Mutations";
-import {useMutation} from "@apollo/client";
+import {useMutation, useQuery} from "@apollo/client";
 import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-
-const EditSchema = Yup.object().shape({
-    body: Yup.string()
-        .min(5, 'Too short!')
-        .max(75, 'Too long')
-        .required('Required!')
-        .matches( /^[a-zA-Z\s]*$/, 'Symbols, numbers and cyrillic letters is not allowed')
-})
+import {LOAD_POST} from "../GraphQL/Queries";
+import {validateBody, validateTitle}  from "../shared/validation"
 
 function EditPost(){
     const { id }= useParams();
+    const {loading,  data} = useQuery(LOAD_POST, {
+        variables : {
+            id: id
+        }
+    })
     const [updatePost] = useMutation(UPDATE_POST);
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
+    useEffect(() => {
+        if(data) {
+            setTitle(data.post.title)
+            setBody(data.post.body)
+        }
+    }, [data])
     return(
         <div>
             <h1>Update post</h1>
-            <Formik initialValues={{body: ''}}
-                    validationSchema={EditSchema}
-                    onSubmit={(values) =>{
-                        updatePost({
-                            variables: {
-                                id: id,
-                                input: values
-                            }}
-                        )
+            <Formik enableReinitialize
+                initialValues={{body: body, title: title,}}
+                    onSubmit={(values, {resetForm}) =>{
+                        console.log(values)
+                            updatePost({
+                                variables: {
+                                    id: id,
+                                    input: {...values}
+                                }}
+                            )
+                        resetForm({...values})
                     }}>
-                {({errors, touched }) =>(
+                {({errors, touched, isValidating }) =>(
                     <Form>
-                        <Field name='body' placeholder="Body" className="input"/>
-                        {errors.body && touched.body ? <div className="text-red-900">{errors.body}</div> : null}
+                        <Field name='title'  className="input" validate={validateTitle}/>
+                        {errors.title && touched.title && <div className="text-red-900">{errors.title}</div>}
+                        <Field name='body'  className="input"  validate={validateBody}/>
+                        {errors.body && touched.body && <div className="text-red-900">{errors.body}</div>}
                         <button type="submit" className="btn btn-submit">Update Todo</button>
                     </Form>
                 )}

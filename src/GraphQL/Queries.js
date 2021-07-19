@@ -24,3 +24,12 @@ export const LOAD_POSTS = gql `
           }
         }
 `
+export const LOAD_POST = gql`
+    query ($id: ID!){
+  post(id: $id) {
+    id
+    title
+    body
+  }
+}
+`
