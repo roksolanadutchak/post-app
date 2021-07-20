@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {useQuery, useMutation} from "@apollo/client";
 import {Link } from 'react-router-dom';
 import {LOAD_POSTS} from "../GraphQL/Queries";

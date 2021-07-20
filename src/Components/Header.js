@@ -1,9 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import {Link} from 'react-router-dom';
 
 function Header(){
-    const history = useHistory();
     return (
             <div>
                 <nav >

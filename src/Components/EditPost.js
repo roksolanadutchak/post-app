@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useParams} from "react-router";
 import {CREATE_POST_INPUT, UPDATE_POST} from "../GraphQL/Mutations";
 import {LOAD_POST} from "../GraphQL/Queries";
