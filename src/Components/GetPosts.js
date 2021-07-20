@@ -7,13 +7,14 @@ import { default as dismiss } from '../assets/delete.svg';
 import { default as pencil} from '../assets/pencil.svg'
 
 function GetPosts(){
-    const {loading,  data} = useQuery(LOAD_POSTS );
+    const {loading, error, data} = useQuery(LOAD_POSTS, { errorPolicy: 'all' } );
     const [deletePost] = useMutation(DELETE_POST);
     if (loading) return 'Loading...';
     return (
         <div className="container mx-auto ">
+            {error && <pre className="text-red-900">{error.message}</pre> }
             <div className="post-wrapper">
-                {data.posts.data.map(({id, title, body}) => (
+                { data && data.posts.data.map(({id, title, body}) => (
                     <div key={id} className="card" >
                         <div className="card-header">
                             <div className="col-span-11">
@@ -31,7 +32,6 @@ function GetPosts(){
                                 </button>
                             </div>
                         </div>
-
                         <div className="m-3">
                             <p className="text-justify leading-relaxed">{body}</p>
                         </div>

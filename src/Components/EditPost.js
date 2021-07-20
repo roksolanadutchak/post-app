@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useParams} from "react-router";
 import {CREATE_POST_INPUT, UPDATE_POST} from "../GraphQL/Mutations";
 import {LOAD_POST} from "../GraphQL/Queries";
@@ -8,33 +8,49 @@ import {validateBody, validateTitle}  from "../shared/validation"
 
 function AddEditPost(){
     const { id }= useParams();
-
-    const {loading,  data} = useQuery(LOAD_POST, {
+    const [success, setSuccess] = useState('')
+    const {loading, data} = useQuery(LOAD_POST, {
         variables : {
             id: id
         },
         skip: !id
     })
-    const [updatePost] = useMutation(UPDATE_POST);
-    const [createPost] = useMutation(CREATE_POST_INPUT)
+    const [updatePost] = useMutation(UPDATE_POST, {
+        onError: (error) => {
+            setSuccess(error.message)
+        },
+        onCompleted: () => {
+           setSuccess('Request was successfully completed!')
+    }
+    });
+    const [createPost ] = useMutation(CREATE_POST_INPUT, {
+        onError: (error) => {
+            setSuccess(error.message)
+        },
+        onCompleted: () => {
+            setSuccess('Request was successfully completed!')
+        }
+    })
 
     function onSubmit(values){
-        if (id){
-            updatePost({
-                variables: {
-                    id: id,
-                    input: {
-                        ...values
+            if (id) {
+                updatePost({
+                        variables: {
+                            id: id,
+                            input: {
+                                ...values
+                            }
+                        }
                     }
-                }}
-            )
-        } else {
-            createPost({
-                variables: {
-                    input: values
-                }
-            });
-        }
+                )
+            } else {
+                createPost({
+                    variables: {
+                        input: values
+                    }
+                })
+                ;
+            }
     }
     if (loading) return 'Loading...';
     return(
@@ -44,7 +60,6 @@ function AddEditPost(){
                     initialValues={{title: id ? data.post.title : '', body: id ? data.post.body : ''}}
                     onSubmit={({title, body}, {resetForm}) =>{
                         onSubmit({title, body})
-
                 }}>
                 {({errors, touched, isValidating }) =>(
                     <Form>
@@ -56,6 +71,7 @@ function AddEditPost(){
                     </Form>
                 )}
             </Formik>
+            { <pre className="text-red-900">{success}</pre> }
         </div>
 
     )
