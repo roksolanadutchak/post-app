@@ -9,7 +9,6 @@ import { default as pencil} from '../assets/pencil.svg'
 function GetPosts(){
     const {loading,  data} = useQuery(LOAD_POSTS );
     const [deletePost] = useMutation(DELETE_POST);
-
     if (loading) return 'Loading...';
     return (
         <div className="container mx-auto ">

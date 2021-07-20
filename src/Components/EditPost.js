@@ -1,49 +1,58 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
-import {UPDATE_POST} from "../GraphQL/Mutations";
+import {CREATE_POST_INPUT, UPDATE_POST} from "../GraphQL/Mutations";
+import {LOAD_POST} from "../GraphQL/Queries";
 import {useMutation, useQuery} from "@apollo/client";
 import { Field, Form, Formik } from 'formik';
-import {LOAD_POST} from "../GraphQL/Queries";
 import {validateBody, validateTitle}  from "../shared/validation"
 
-function EditPost(){
+function AddEditPost(){
     const { id }= useParams();
+
     const {loading,  data} = useQuery(LOAD_POST, {
         variables : {
             id: id
-        }
+        },
+        skip: !id
     })
     const [updatePost] = useMutation(UPDATE_POST);
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
-    useEffect(() => {
-        if(data) {
-            setTitle(data.post.title)
-            setBody(data.post.body)
+    const [createPost] = useMutation(CREATE_POST_INPUT)
+
+    function onSubmit(values){
+        if (id){
+            updatePost({
+                variables: {
+                    id: id,
+                    input: {
+                        ...values
+                    }
+                }}
+            )
+        } else {
+            createPost({
+                variables: {
+                    input: values
+                }
+            });
         }
-    }, [data])
+    }
+    if (loading) return 'Loading...';
     return(
         <div>
-            <h1>Update post</h1>
+            {id ? <h1 className="text-3xl">Update post</h1> : <h1 className="text-3xl">Create post</h1>}
             <Formik enableReinitialize
-                initialValues={{body: body, title: title,}}
-                    onSubmit={(values, {resetForm}) =>{
-                        console.log(values)
-                            updatePost({
-                                variables: {
-                                    id: id,
-                                    input: {...values}
-                                }}
-                            )
-                        resetForm({...values})
-                    }}>
+                    initialValues={{title: id ? data.post.title : '', body: id ? data.post.body : ''}}
+                    onSubmit={({title, body}, {resetForm}) =>{
+                        onSubmit({title, body})
+
+                }}>
                 {({errors, touched, isValidating }) =>(
                     <Form>
                         <Field name='title'  className="input" validate={validateTitle}/>
                         {errors.title && touched.title && <div className="text-red-900">{errors.title}</div>}
                         <Field name='body'  className="input"  validate={validateBody}/>
                         {errors.body && touched.body && <div className="text-red-900">{errors.body}</div>}
-                        <button type="submit" className="btn btn-submit">Update Todo</button>
+                        {id ? <button type="submit" className="btn btn-submit">Update Post</button> : <button type="submit" className="btn btn-submit">Create Post</button>}
                     </Form>
                 )}
             </Formik>
@@ -51,4 +60,4 @@ function EditPost(){
 
     )
 }
-export default EditPost
+export default AddEditPost

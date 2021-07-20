@@ -17,7 +17,7 @@ code {
 @tailwind forms;
 @layer components {
   .input {
-    @apply form-input px-2 py-1 rounded-md bg-blue-50 placeholder-gray-500 placeholder-opacity-75;
+    @apply form-input px-2 py-1 rounded-md bg-blue-50 placeholder-gray-500 placeholder-opacity-75 w-full;
   }
   .btn {
     @apply h-7 rounded ring-2;
@@ -44,6 +44,6 @@ code {
     @apply shadow-md rounded-md mt-8 bg-blue-100
   }
   .card-header {
-    @apply grid p-2 h-auto  md:h-16 rounded-md bg-blue-300 grid-cols-12
+    @apply grid p-2 h-auto md:h-16 rounded-md bg-blue-300 grid-cols-12
   }
 }
