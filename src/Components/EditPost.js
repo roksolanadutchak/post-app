@@ -32,26 +32,24 @@ function AddEditPost(){
         }
     })
 
-    function onSubmit(values){
-            if (id) {
-                updatePost({
-                        variables: {
-                            id: id,
-                            input: {
-                                ...values
-                            }
-                        }
-                    }
-                )
-            } else {
-                createPost({
-                    variables: {
-                        input: values
-                    }
-                })
-                ;
-            }
-    }
+    function onSubmit(values) {
+      if (id) {
+        updatePost({
+          variables: {
+            id: id,
+            input: {
+              ...values,
+            },
+          },
+        });
+      } else {
+        createPost({
+          variables: {
+            input: values,
+          },
+        });
+      }
+    }   
     if (loading) return 'Loading...';
     return(
         <div>
