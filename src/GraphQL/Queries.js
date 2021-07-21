@@ -1,13 +1,4 @@
 import {gql} from "@apollo/client";
-export const LOAD_USERS = gql`
-      query {
-        user(id: 1) {
-            id
-            name
-            email
-          }
-        }
-    `
 export const LOAD_POSTS = gql `
             query (
           $options: PageQueryOptions
@@ -23,4 +14,13 @@ export const LOAD_POSTS = gql `
             }
           }
         }
+`
+export const LOAD_POST = gql`
+    query ($id: ID!){
+  post(id: $id) {
+    id
+    title
+    body
+  }
+}
 `

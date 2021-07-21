@@ -18,6 +18,7 @@ export const UPDATE_POST = gql`
       updatePost(id: $id, input: $input) {
         id
         body
+        title
       }
     }
 `

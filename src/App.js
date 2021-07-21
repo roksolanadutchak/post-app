@@ -1,26 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
 import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
-} from "@apollo/client";
-import GetUser from "./Components/GetUser";
-import GetPosts from "./Components/GetPosts";
-import Form from "./Components/Form";
+  Switch,
+  Route
+} from "react-router-dom";
 
-const client = new ApolloClient({
-  uri: 'https://graphqlzero.almansi.me/api',
-  cache: new InMemoryCache()
-});
+import GetPosts from "./Components/GetPosts";
+import Home from "./Components/Home";
+import Header from "./Components/Header";
+import AddEditPost from "./Components/EditPost";
+
+
 function App() {
-  return <ApolloProvider client={client}>
-    {" "}
-    <GetUser />
-    <GetPosts />
-  </ApolloProvider>
+  return (
+      <div>
+        <Header />
+        <div>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/posts">
+              <GetPosts />
+            </Route>
+            <Route path="/add">
+              <AddEditPost />
+            </Route>
+            <Route path="/edit/:id">
+              <AddEditPost />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+  )
 }
 
 export default App;
