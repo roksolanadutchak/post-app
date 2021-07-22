@@ -46,4 +46,19 @@ code {
   .card-header {
     @apply grid p-2 h-auto lg:h-16 rounded-md bg-blue-300 grid-cols-12
   }
+  .modal {
+    @apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none;
+  }
+  .modal-wrapper {
+    @apply relative w-auto my-6 mx-auto max-w-3xl
+  }
+  .modal-body {
+    @apply border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none
+  }
+  .modal-header {
+    @apply flex items-start justify-between p-5 border-b border-solid border-gray-200 rounded-t
+  }
+  .modal-footer {
+    @apply flex items-center justify-end p-6 border-t border-solid border-gray-200 rounded-b
+  }
 }
