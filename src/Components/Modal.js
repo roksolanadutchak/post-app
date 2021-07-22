@@ -7,10 +7,8 @@ import {validateBody}  from "../shared/validation"
 
 const Modal = ({ isVisible, hideModal, id}) => {
     const [deletePost] = useMutation(DELETE_POST);
-    function submit (reason){
-        return localStorage.setItem('reason', reason)
-    }
-    function deletingPost(){
+    const submit = (reason) => {
+        localStorage.setItem('reason', reason)
         return deletePost({ variables: {id: id } })
     }
     return isVisible ? createPortal(
@@ -39,9 +37,7 @@ const Modal = ({ isVisible, hideModal, id}) => {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button
-                        onClick={deletingPost} className="btn btn-cancel">Delete</button>
-                        <button onClick={hideModal} className="btn btn-submit">Close</button>
+                        <button onClick={hideModal} className="btn btn-cancel">Close</button>
                     </div>
                 </div>
             </div>

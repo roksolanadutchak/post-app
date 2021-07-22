@@ -10,19 +10,19 @@ import Modal from "./Modal";
 function GetPosts(){
     const {loading, error, data} = useQuery(LOAD_POSTS, { errorPolicy: 'all' } );
     const {isVisible, toggleModal} = useModal();
-    const [id, setId] = useState(0)
+    const [deleteId, setDeleteId] = useState(0)
     if (loading) return 'Loading...';
-    function settingId(id){
-        setId(id)
+    const setIdToDelete = id => event => {
+        setDeleteId(id)
     }
     return (
         <div className="container mx-auto ">
             {error && <pre className="text-red-900">{error.message}</pre> }
-            <Modal isVisible={isVisible} hideModal={toggleModal} id={id}/>
+            <Modal isVisible={isVisible} hideModal={toggleModal} id={deleteId}/>
             <div className="post-wrapper">
                 { data && data.posts.data.map(({id, title, body}) => (
                     <div key={id} className="card" >
-                        <div className="card-header" onClick={() => settingId(id)}>
+                        <div className="card-header" onClick={setIdToDelete(id)}>
                             <div className="col-span-11">
                                 <h1 className="text-center">{title}</h1>
                             </div>
