@@ -52,7 +52,7 @@ function AddEditPost(){
     }   
     if (loading) return 'Loading...';
     return(
-        <div>
+        <div className="container mx-auto">
             {id ? <h1 className="text-3xl">Update post</h1> : <h1 className="text-3xl">Create post</h1>}
             <Formik enableReinitialize
                     initialValues={{title: id ? data.post.title : '', body: id ? data.post.body : ''}}

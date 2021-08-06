@@ -15,13 +15,13 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 ReactDOM.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <ApolloProvider client={client}>
-                 <App />
-            </ApolloProvider>
-        </BrowserRouter>
-    </React.StrictMode>,
+        <React.StrictMode>
+            <BrowserRouter>
+                <ApolloProvider client={client}>
+                     <App />
+                </ApolloProvider>
+            </BrowserRouter>
+        </React.StrictMode>,
   document.getElementById('root'),
 );
 
