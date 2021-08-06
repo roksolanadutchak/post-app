@@ -7,7 +7,7 @@ function UsersList(){
     if (loading) return <div className="loader">Loading...</div>;
     return (
         <div className="container mx-auto">
-            <div className="grid grid-cols-1 divide-y divide-pink-800">
+            <div className="users-list">
                 {data && data.users.data.map(({id, username}) => (
                     <div key={id} >
                         <Link to={`/user/${id}`}>

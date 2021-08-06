@@ -23,23 +23,23 @@ function User(){
     const {username, email, address} = user.user
     return(
         <div className="container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-6 grid-rows-6 gap-4 md:gap-6 ">
-            <div className={posts ? "border col-start-2 col-span-4 row-span-2 bg-red-200" : "border col-start-2 col-span-2 row-span-2 bg-blue-200"}>
-                <div className={posts && "relative top-1/3 left-1/3 text-xl"}>
+            <div className="grid-container">
+            <div className={posts ? "user-expanded" : "user"}>
+                <div className={posts && "user-expanded-text"}>
                     <h1 className="font-bold text-2xl">{username}</h1>
                     <p>{email}</p>
                     <p>lat: {address.geo.lat}</p>
                     <p>lng: {address.geo.lng}</p>
-                    {!posts && <button onClick={() => getPosts()} className="text-blue-900 border border-blue-900 ">Show Posts</button>}
+                    {!posts && <button onClick={() => getPosts()} className="btn btn-submit">Show Posts</button>}
                 </div>
             </div>
             {posts && posts.user.posts.data.map(({id, title, body}) => (
-                <div key={id} className="border col-span-2 bg-red-100 grid grid-cols-3">
+                <div key={id} className="user-posts">
                     <div className="bg-red-200">
-                        <h1 className="font-bold m-2.5 text-center">{title}</h1>
+                        <h1 className="user-post-title">{title}</h1>
                     </div>
                     <div className="col-span-2 bg-red-100">
-                        <h2 className="italic m-2.5 text-justify">{body}</h2>
+                        <h2 className="user-post-body">{body}</h2>
                     </div>
                 </div>
             ))}
