@@ -24,3 +24,46 @@ export const LOAD_POST = gql`
   }
 }
 `
+export const LOAD_USERS = gql`
+query (
+  $options: PageQueryOptions
+) {
+  users(options: $options) {
+    data {
+      id
+      username
+    }
+    meta {
+      totalCount
+    }
+  }
+}
+`
+export const LOAD_USER = gql`
+query ($id: ID!){
+  user(id: $id) {
+    id
+    username
+    email
+    address {
+      geo {
+        lat
+        lng
+      }
+    }
+  }
+}
+`
+export const LOAD_USER_POSTS = gql`
+query ($id: ID!){
+  user(id: $id) {
+    posts {
+      data {
+        id
+        title
+        body
+      }
+    }
+  }
+}
+`

@@ -11,7 +11,7 @@ function GetPosts(){
     const {loading, error, data} = useQuery(LOAD_POSTS, { errorPolicy: 'all' } );
     const {isVisible, toggleModal} = useModal();
     const [deleteId, setDeleteId] = useState(0)
-    if (loading) return 'Loading...';
+    if (loading) return <div className="loader">Loading...</div>;
     const setIdToDelete = id => event => {
         setDeleteId(id)
     }
